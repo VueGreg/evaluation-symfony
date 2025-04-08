@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Page d'Accueil{% endblock %}
+
+{% block body %}
+    <div class="jumbotron text-center">
+        <h1>Bienvenue sur notre application</h1>
+        <p>Découvrez nos tâches en cours</p>
+    </div>
+
+    <div class="row">
+        {% for task in tasks %}
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ task.title }}</h5>
+                        <p class="card-text">{{ task.description }}</p>
+                        <p class="card-text"><strong>Status:</strong> {{ task.status|capitalize }}</p>
+                    </div>
+                </div>
+            </div>
+        {% else %}
+            <div class="col-12">
+                <p>Aucune tâche à afficher pour le moment.</p>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

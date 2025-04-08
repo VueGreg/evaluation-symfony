@@ -1,0 +1,27 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f8f9fa;
+}
+
+.jumbotron {
+    background-color: #007bff;
+    color: white;
+    padding: 40px;
+}
+
+.jumbotron h1 {
+    font-size: 3rem;
+}
+
+.jumbotron p {
+    font-size: 1.5rem;
+}
+
+.card {
+    margin-top: 20px;
+}
+
+.card-img-top {
+    height: 200px;
+    object-fit: cover;
+}

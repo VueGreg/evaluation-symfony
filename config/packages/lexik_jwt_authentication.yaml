@@ -4,5 +4,5 @@ lexik_jwt_authentication:
     pass_phrase: '%env(JWT_PASSPHRASE)%'
     api_platform:
         check_path: /api/login_check
-        username_path: email
+        username_path: username
         password_path: password
