@@ -9,6 +9,16 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity(repositoryClass: TaskRepository::class)]
 class Task
 {
+    const STATUS_TODO = 'todo';
+    const STATUS_IN_PROGRESS = 'in_progress';
+    const STATUS_DONE = 'done';
+
+    const STATUSES = [
+        self::STATUS_TODO,
+        self::STATUS_IN_PROGRESS,
+        self::STATUS_DONE
+    ];
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -20,8 +30,8 @@ class Task
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $description = null;
 
-    #[ORM\Column]
-    private array $status = [];
+    #[ORM\Column(type: Types::STRING, length: 20)]
+    private string $status = self::STATUS_TODO;
 
     #[ORM\Column]
     private ?\DateTimeImmutable $created_at = null;
@@ -58,13 +68,17 @@ class Task
         return $this;
     }
 
-    public function getStatus(): array
+    public function getStatus(): string
     {
         return $this->status;
     }
 
-    public function setStatus(array $status): static
+    public function setStatus(string $status): static
     {
+        if (!in_array($status, self::STATUSES)) {
+            throw new \InvalidArgumentException('Invalid status value');
+        }
+
         $this->status = $status;
 
         return $this;
